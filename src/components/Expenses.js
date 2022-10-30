@@ -2,7 +2,7 @@ import React from 'react'
 
 const Expenses = () => {
   return (
-    <div>Expenses</div>
+    <div>Expenses will loop over Expense Item</div>
   )
 }
 
