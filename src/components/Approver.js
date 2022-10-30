@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import expenseContext from '../context/expenses/expenseContext'
+import ExpenseItemApprover from './ExpenseItemApprover'
 
 const Approver = () => {
+  const context = useContext(expenseContext)
+  const { expensesApprover, getExpenses } = context
+
+  useEffect(() => {
+    getExpenses('approver')
+    // eslint-disable-next-line
+  }, [])
+
+
   return (
-    <div>Approver will now loop through ExpenseItemApprover which has aditional buttons to approve or reject with comment.</div>
+    <div className='mx-3'>
+      <div className='row my-3'>
+        <h1 className='display-6'>Approver's Section.</h1>
+        <div className='container'>
+          {expensesApprover.length === 0 && 'You have not added any expenses yet.'}
+        </div>
+        {expensesApprover.map((element) => {
+          return <ExpenseItemApprover key={element.id} expenseProp={element} />
+        })}
+      </div>
+    </div>
   )
 }
 
