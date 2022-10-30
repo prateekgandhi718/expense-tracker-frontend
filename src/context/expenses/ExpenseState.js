@@ -65,11 +65,28 @@ const ExpenseState = (props) => {
       })
   }
 
+  //Approve or reject the expense
+  const approveRejectExpense = async (id, operation, comments) => {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+    }
+
+    let formData = new FormData();
+    formData.append("comments", comments);
+
+    axios.post(`${host}api/core/expense-approval?id=${id}&operation=${operation}`, formData, config)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
 
 
   return (
-    <expenseContext.Provider value={{ expenses, expensesApprover, singleExpense ,getExpenses, addExpense, getASingleExpense }}>
+    <expenseContext.Provider value={{ expenses, expensesApprover, singleExpense ,getExpenses, addExpense, getASingleExpense, approveRejectExpense }}>
       {props.children}
     </expenseContext.Provider>
   )

@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import expenseContext from '../context/expenses/expenseContext'
 
 const ExpenseItemApprover = (props) => {
+    const context = useContext(expenseContext)
+    const { approveRejectExpense } = context
+
+    const [comments, setComments] = useState("")
+
+    const onChange = (e) => {
+        setComments(e.target.value)
+        console.log(comments)
+    }
+
     return (
         <div className="col-md-3">
             <div className="card border-info my-3">
@@ -15,13 +26,13 @@ const ExpenseItemApprover = (props) => {
                     </Link>
                     <form className='mb-5'>
                         <label htmlFor="description" className="form-label">Comments</label>
-                        <input type="text" className="form-control" id="comments" name="comments" />
+                        <input type="text" className="form-control" id="comments" name="comments" onChange={onChange} value = {comments} />
                     </form>
                     <div className='d-flex justify-content-between'>
-                        <button type="submit" className="btn btn-outline-success btn-sm" >Approve</button>
-                        <button type="submit" className="btn btn-outline-danger btn-sm" >Reject</button>
+                        <button type="submit" className="btn btn-outline-success btn-sm" onClick={() => {approveRejectExpense(props.expenseProp.id, 'approve', comments); setComments("")}} >Approve</button>
+                        <button type="submit" className="btn btn-outline-danger btn-sm" onClick={() => {approveRejectExpense(props.expenseProp.id, 'reject', comments); setComments("")}} >Reject</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
