@@ -4,7 +4,7 @@ import { saveAs } from "file-saver";
 
 const Expense = () => {
   const context = useContext(expenseContext)
-  const {singleExpense} = context
+  const { singleExpense } = context
   const host = "https://assessmentstgacc.blob.core.windows.net/prateek-expenses-container";
 
   const downloadImage = () => {
@@ -26,19 +26,26 @@ const Expense = () => {
           </em>
         </p>
 
-        <img
-          src={`${host}${singleExpense.reciept}`}
-          alt="title"
-          className="img-fluid"
-          style={{ width: "20rem", marginBottom: "1.5rem", borderRadius: "2rem" }}
-        />
+        {singleExpense.reciept === null ? (
+          <p className="lead" style={{ wordWrap: 'break-word', marginTop: '1rem' }}>
+            <em>No reciept was uploaded.
+            </em>
+          </p>
+        ) : (
+          <img
+            src={`${host}${singleExpense.reciept}`}
+            alt="title"
+            className="img-fluid"
+            style={{ width: "20rem", marginBottom: "1.5rem", borderRadius: "2rem" }}
+          />
+        )}
 
         <p className="lead" style={{ wordWrap: 'break-word', marginTop: '1rem' }}>
           <em>Status: {singleExpense.status}
           </em>
         </p>
 
-        <button type="button" className="btn btn-dark" onClick={downloadImage}>
+        <button disabled={singleExpense.reciept === null} type="button" className="btn btn-dark" onClick={downloadImage}>
           Download the reciept.
         </button>
       </div>

@@ -24,14 +24,13 @@ const AddExpense = () => {
     } else {
       setExpense({ ...expense, [e.target.name]: e.target.value })
     }
-    console.log(expense)
-    console.log(reciept.imageDataType)
+    // console.log(expense)
+    // console.log(reciept.imageDataType)
   }
 
   const handleSubmit = () => {
-    //expense.date is still a string. convert to date object?
-    addExpense(expense.category, expense.date, expense.amount, expense.comments, reciept.imageDataType[0])
-    console.log(reciept.imageDataType[0])
+    addExpense(expense.category, expense.date, expense.amount, expense.comments, reciept !== null ? reciept.imageDataType[0] : "")
+    // console.log(reciept.imageDataType[0])
     //When you click add, the fields should be blank again therefore,
     setExpense({
       'category': "",
@@ -44,8 +43,8 @@ const AddExpense = () => {
 
   return (
     <>
-      <div className="container d-flex justify-content-center">
-        <form>
+      <div className="container d-flex justify-content-center flex-column">
+        <form className='container d-flex justify-content-center flex-column' style={{width: "25rem"}}>
 
           <div className="mb-3">
             <label htmlFor="description" className="form-label">Expense Category</label>
@@ -76,7 +75,7 @@ const AddExpense = () => {
           </div>
 
         </form>
-          <div>
+          <div className='container d-flex justify-content-center flex-column' style={{width: "12rem"}}>
             <button type="submit" className="btn btn-primary" style={{ backgroundColor: "black" }} onClick = {handleSubmit} >Add Exepense</button>
           </div>
       </div>
