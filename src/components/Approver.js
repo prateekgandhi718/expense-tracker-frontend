@@ -17,7 +17,7 @@ const Approver = () => {
       <div className='row my-3'>
         <h1 className='display-6'>Approver's Section.</h1>
         <div className='container'>
-          {expensesApprover.length === 0 && 'You have not added any expenses yet.'}
+          {expensesApprover.length === 0 && 'No expenses to manually approve as of yet.'}
         </div>
         {expensesApprover.map((element) => {
           return <ExpenseItemApprover key={element.id} expenseProp={element} />
