@@ -3,7 +3,7 @@ import expenseContext from "./expenseContext";
 import axios from 'axios';
 
 const ExpenseState = (props) => {
-  const host = "http://127.0.0.1:8000/"
+  const host = "https://assessment-apim.azure-api.net/prateek-apim/"
 
   const [expenses, setExpenses] = useState([])
   const [expensesApprover, setExpensesApprover] = useState([])
